@@ -1,0 +1,108 @@
+<div>
+  <div *ngIf="products.length <=0">
+    <p class="empty">You don't have any orders yet.</p>
+
+  </div>
+    <div *ngIf="products.length > 0" class="table-responsive table table-cst">
+      <table class="table ">
+        <thead>
+          <tr>
+            <th>
+              <button class="btn btn-primary" (click)="toggleImage()">
+                {{ showImage ? "Hide Image" : "Show Image" }}
+              </button>
+            </th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Quantity</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>
+              <img
+                *ngIf="showImage"
+                [src]="displayImage(product.productId.image)"
+                class="pr-img"
+                [title]="product.name"
+                alt=""
+              />
+            </td>
+            <td>
+              <a [routerLink]="['/products',product.productId._id]">{{ product.productId.name }}</a>
+            </td>
+            <td>{{ product.productId.code   }}</td>
+            <td>{{ product.productId.releaseDate | date  }}</td>
+            <td>{{ product.productId.price  | currency : "USD" : true : "1.2-2"}}</td>
+            <td><pm-star [rating]="product.productId.rating"></pm-star></td>
+            <td>{{product.quantitiy}}</td>
+            <!-- <td>
+              <button *ngIf="product.quantitiy" class="cart-button" (click)="removeFromCart(product._id, product.quantitiy)">
+                Remove
+                <img
+                  class="cart-img"
+                  src="https://cdn-icons-png.flaticon.com/128/484/484662.png"
+                  alt=""
+                />
+              </button>
+            </td> -->
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- <div class="cart-bottom">
+      <div class="total">Total : {{ amount | currency }}</div>
+      <div>
+        <button class="checkout-btn" (click)="makePayment(amount)">Checkout</button>
+      </div>
+    </div> -->
+  </div>
+  
+  
+  <!-- <div>
+    <div>
+      Cart Products
+    </div>
+  
+    <div class="products-parent">
+      
+        
+        <div class="single-product" *ngFor="let product of products">
+          <div class="image">
+            <img class="img" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" alt="">
+          </div>
+          <div class="name-rating">
+            <div>{{product.name}}</div>
+            <div><pm-star [rating]="product.rating"></pm-star></div>
+  
+          </div>
+          <div class="quantity">
+            <button class="increment">+</button>
+            <div>{{product.quantity}}</div>
+            <button class="decrement">-</button>
+          </div>
+          <div class="price">
+            350
+            
+          </div>
+          <div class="remove">
+            <button class="cart-button" >
+              Remove
+              <img
+                class="cart-img"
+                src="https://cdn-icons-png.flaticon.com/128/484/484662.png"
+                alt=""
+              />
+            </button>
+          </div>
+      </div>
+      </div>
+    
+  </div> -->
+  

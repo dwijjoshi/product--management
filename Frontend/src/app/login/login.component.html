@@ -1,0 +1,43 @@
+<div class="parent">
+  <div class="login_heading">Login</div>
+  <div class="container">
+    <form
+      #myForm="ngForm"
+      (ngSubmit)="onSubmit(myForm.value)"
+      action=" "
+      class="form"
+    >
+      <label for="">Email</label>
+      <input
+        type="email"
+        placeholder="Enter your email..."
+        name="email"
+        ngModel
+        required
+      />
+      <div *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched">
+        <p class="error">Email is required</p>
+
+      </div>
+
+      <label for="">Password</label>
+      <input
+        type="password"
+        placeholder="Enter your password..."
+        name="password"
+        ngModel
+        required
+      />
+      <div *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched">
+        <p class="error">Password is required</p>
+
+      </div>
+
+
+      <button type="submit" class="submit-btn"  [disabled]="(myForm.controls['email'].invalid && myForm.controls['email'].touched) || (myForm.controls['password'].invalid && myForm.controls['password'].touched)" >Login</button>
+      <span class="create_acc" [routerLink]="['/signup']"
+        >Create a new account!</span
+      >
+    </form>
+  </div>
+</div>

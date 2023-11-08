@@ -1,0 +1,54 @@
+<div class="parent">
+  <div class="login_heading">Sign Up</div>
+  <div class="container">
+    <form
+      #myForm="ngForm"
+      (ngSubmit)="onSubmit(myForm.value)"
+      action=" "
+      class="form"
+    >
+      <label for="">Name</label>
+      <input
+        type="text"
+        placeholder="Enter your username..."
+        name="name"
+        ngModel
+        required
+      />
+      <div *ngIf="myForm.controls['name'].invalid && myForm.controls['name'].touched">
+        <p class="error">Name is required</p>
+      </div>
+
+      <label for="">Email</label>
+      <input
+        type="email"
+        placeholder="Enter your email..."
+        name="email"
+        ngModel
+        required
+      />
+
+      <div *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched">
+        <p class="error">Email is required</p>
+
+      </div>
+
+      <label for="">Password</label>
+      <input
+        type="password"
+        placeholder="Enter your password..."
+        name="password"
+        ngModel
+        required
+      />
+      <div *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched">
+        <p class="error">Passwprd is required</p>
+      </div>
+      
+      <button type="submit" class="submit-btn">Sign Up</button>
+      <span class="login" [routerLink]="['/login']"
+        >Already have an account?</span
+      >
+    </form>
+  </div>
+</div>

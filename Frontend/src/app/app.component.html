@@ -1,0 +1,63 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand p-2" href="#">Product Management</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class=" navbar-custom collapse navbar-collapse" id="navbarNav">
+      <div>
+        <ul class="navbar-nav">
+          <li class="nav-item active" *ngIf="showLogout">
+            <a class="nav-link" [routerLink]="['/welcome']"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item" *ngIf="showLogout">
+            <a class="nav-link" [routerLink]="['/products']"
+              >Product List</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="showLogout && !admin">
+            <a class="nav-link" [routerLink]="['/orders']"
+              >My Orders</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <button
+          *ngIf="showLogout"
+          class="switch-button"
+          (click)="logoutUser()"
+        >
+          Logout
+        </button>
+        <button *ngIf="showLogout && !admin" [routerLink]="['/cart']" class="switch-button">
+          <span class="cart-number">{{ cartItems }}</span>
+          <img
+            class="cart-img"
+            src="https://img.icons8.com/sf-regular-filled/48/FFFFFF/shopping-cart.png"
+            alt=""
+          />
+        </button>
+
+        <!-- <button class="switch-button" (click)="changeUser()">
+          {{ admin ? 'Switch to User' : 'Switch to Admin' }}
+        </button> -->
+        
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <router-outlet></router-outlet>
+    <app-loading></app-loading>
+  </div>
+</div>

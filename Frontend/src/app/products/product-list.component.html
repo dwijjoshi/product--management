@@ -1,0 +1,120 @@
+<div class="welcome-parent">
+  <div class="name">
+  Welcome {{name}}
+</div>
+<div class="role">
+  Role : {{admin? "Admin" : "User"}}
+</div>
+</div>
+
+<div class="sort-parent">
+  <!-- <select [(ngModel)]="selectedSortOption" (change)="sortProducts()" class="sort-products">
+    <option value="lowest">Lowest to Highest</option>
+    <option value="highest">Highest to Lowest</option>
+  </select> -->
+</div>
+
+<div class="pr-list-parent  ">
+  <div class="navbar  p-2">
+    <div class="h2">
+    Product List
+  </div>
+    <div>
+      <div class="product-top">
+      
+        <div class="" *ngIf="admin">
+          
+          <button [routerLink]="['/add-product']" class="add-btn">
+            Add Products
+            <img
+              class="cart-img"
+              src="https://cdn-icons-png.flaticon.com/128/148/148764.png"
+              alt=""
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    
+    
+    <div class="table-responsive table">
+      <table class="table " *ngIf="products && products.length">
+        <thead>
+          <tr>
+            <th>
+              <button class="btn btn-primary" (click)="hideImage()">
+                {{ showImage ? "Hide Image" : "Show Image" }}
+              </button>
+            </th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>
+              <img
+                *ngIf="showImage"
+                [src]="displayImage(product.image)"
+                [title]="product.name"
+                class="pr-img"
+                alt=""
+              />
+            </td>
+            <td>
+              <a [routerLink]="['/products',product._id]">{{ product.name }}</a>
+            </td>
+            <td>{{ product.code | lowercase | convertToSpaces : "-" }}</td>
+            <td>{{ product.releaseDate | date}}</td>
+            <td>{{ product.price | currency : "USD" : true : "1.2-2" }}</td>
+            <td>
+              <pm-star
+                [rating]="product.rating"
+                
+              ></pm-star>
+            </td>
+            <td *ngIf="!admin">
+              <button class="cart-button" (click)="addToCart(product._id)">
+                Add to Cart
+                <img
+                  class="cart-img"
+                  src="https://img.icons8.com/sf-regular-filled/48/FFFFFF/shopping-cart.png"
+                  alt=""
+                />
+              </button>
+            </td>
+            <td *ngIf="admin" class="edit-delete">
+              <button
+                [routerLink]="['/edit-product', product._id]"
+                class="edit-button"
+              >
+                Edit
+                <img
+                  class="edit-img"
+                  src="https://cdn-icons-png.flaticon.com/128/1159/1159633.png"
+                  alt=""
+                /></button
+              ><button
+                (click)="deleteProduct(product._id)"
+                class="delete-button"
+              >
+                Delete
+                <img
+                  class="delete-img"
+                  src="https://cdn-icons-png.flaticon.com/128/484/484662.png"
+                  alt=""
+                />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

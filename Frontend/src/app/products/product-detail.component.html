@@ -1,0 +1,34 @@
+
+<div class="container">
+    <div class="heading">
+        <div class="image">
+            <img [src]="displayImage(product.image)" alt="" class="product_image">
+            
+        </div>
+        <div class="head-details">
+            <span class="name">Name : {{product.name}}</span>
+            <hr>
+            <span class="price">Price : {{product.price | currency}}</span>
+            <hr>
+            <span class="rating">
+              <span>Rating : </span>
+              <pm-star
+                [rating]="product.rating"
+                
+              ></pm-star></span>
+              <hr>
+              <div class="desc">
+                <span class="desc_title">Product Description</span>
+                <span class="desc_text">{{product.description}}</span>
+              </div>
+              <hr>
+              <button class="cart" (click)="addToCart(product._id)" *ngIf="!admin" >
+                Add To Cart
+              </button>
+              <button class="edit" (click)="editProduct(product._id)" *ngIf="admin" >
+                Edit
+              </button>
+              
+        </div>
+    </div>
+</div>
